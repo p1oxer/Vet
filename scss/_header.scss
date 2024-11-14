@@ -1,0 +1,242 @@
+.header__body {
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    gap: 10px;
+
+    @media (max-width:$tablet) {
+        justify-content: start;
+        gap: 30px;
+    }
+}
+
+.header__logo img {
+    width: 70px;
+    height: 70px;
+    background-color: #191919;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 10;
+    position: relative;
+}
+
+.header__list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    @media (max-width:$tablet) {
+        display: none;
+    }
+}
+
+.header__link {
+    color: #000000;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    @include adaptiveValue("font-size", 16, 14, 1920, 991);
+}
+
+.header__link:hover {
+    background-color: #b9d9de;
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #b9d9de;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    list-style: none;
+    min-width: 200px;
+    z-index: 999;
+}
+
+.dropdown-menu li {
+    margin-bottom: 10px;
+}
+
+.dropdown-menu li a {
+    color: #333333;
+    font-size: 16px;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: block;
+    border-radius: 5px;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f0f0f0;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 20px;
+    gap: 10px;
+
+    @media (max-width:$tablet) {
+        // display: none;
+        margin-left: auto;
+        z-index: 6;
+    }
+}
+
+.contact-info a,
+.contact-info p {
+    font-size: 14px;
+    color: #000000;
+    margin: 0;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+
+.menu {
+    display: none;
+    position: relative;
+    z-index: 3;
+
+
+
+    @media (max-width:$tablet) {
+        display: block;
+    }
+
+
+    // .menu__body
+    &__body {
+        text-align: right;
+    }
+
+    // .menu__list
+    &__list {
+        position: absolute;
+        top: 120px;
+        right: 15px;
+        padding-bottom: 15px;
+    }
+
+    // .menu__item
+    &__item {
+        &:not(:last-child) {
+            margin-bottom: rem(20);
+        }
+    }
+
+    // .menu__link
+    &__link {
+        @include adaptiveValue("font-size", 24, 20, 767, 320);
+        color: #fff;
+    }
+}
+
+@media (max-width:$tablet) {
+    .menu__body {
+        display: block;
+        position: fixed;
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 100%;
+        background: #fff;
+        transition: left 0.3s ease 0s;
+
+        &::before {
+            content: '';
+            height: rem(100);
+            width: 100%;
+            background-color: #fff;
+            top: 0;
+            left: 100%;
+            z-index: 4;
+            position: absolute;
+
+            .menu-open & {
+                left: 0;
+            }
+        }
+    }
+
+    .menu-open .menu__body {
+        left: 0%;
+    }
+
+    .menu-open .menu__body::before {
+        left: 0%;
+    }
+
+}
+
+.icon-menu {
+    display: none;
+
+    @media (max-width: $tablet) {
+        display: block;
+        position: relative;
+        width: rem(30);
+        height: rem(18);
+        cursor: pointer;
+        z-index: 5;
+
+        span,
+        &::before,
+        &::after {
+            content: "";
+            transition: all 0.3s ease 0s;
+            right: 0;
+            position: absolute;
+            width: 100%;
+            height: rem(2);
+            background-color: #000;
+        }
+
+        &::before {
+            top: 0;
+        }
+
+        &::after {
+            bottom: 0;
+        }
+
+        span {
+            top: calc(50% - rem(1));
+        }
+
+        .menu-open & {
+            span {
+                width: 0;
+            }
+
+            &::before,
+            &::after {}
+
+            &::before {
+                top: calc(50% - rem(1));
+                transform: rotate(-45deg);
+            }
+
+            &::after {
+                bottom: calc(50% - rem(1));
+                transform: rotate(45deg);
+            }
+        }
+    }
+}
